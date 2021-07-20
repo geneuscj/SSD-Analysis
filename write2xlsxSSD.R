@@ -56,10 +56,13 @@ RES.DF <- as.data.frame(resultsTable)
 RES.DF <- data.frame(Distribution=c("Normal","Logistic","Non-parametric"),RES.DF)
 #Write the actual results starting in row 3, header added next
 #8 columns with params, 6 without
-RES.DF.noparms <- RES.DF[,-(6:7)]
+RES.DF.noparms <- as.data.frame(cbind(RES.DF[,-(6:7)], input$ConfLevel))
+print("I am printing noparams")
+print(RES.DF.noparms)
 RES.parms <- RES.DF[-nrow(RES.DF),(6:7)]
+print(RES.parms)
 writeData(wb = wb,sheet = 1,x = RES.DF.noparms,startCol = SC.res,startRow = 3,colNames = FALSE)
-writeData(wb = wb,sheet = 1,x = as.data.frame(rbind(c("Distribution","P",names(RES.DF.noparms)[3],"LowerCL","UpperCL","AD GOF"))),
+writeData(wb = wb,sheet = 1,x = as.data.frame(rbind(c("Distribution","P",names(RES.DF.noparms)[3],"LowerCL","UpperCL","AD GOF", "Confidence Level"))),
           startCol = SC.res,startRow = 1,colNames = FALSE)
 writeData(wb = wb,sheet = 1,x = as.data.frame(rbind(c("","",unitSTR,unitSTR,unitSTR,"p-value"))),
           startCol = SC.res,startRow = 2,colNames = FALSE)
