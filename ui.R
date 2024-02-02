@@ -64,7 +64,7 @@ if(file.exists("BV Analysis.xlsx"))unlink("BV Analysis.xlsx")
 
 shinyUI(
   fluidPage(
-    shinyalert::useShinyalert(),  # Sets up shinyalert
+    shinyalert::useShinyalert(force = TRUE),  # Sets up shinyalert
     titlePanel("ES + BMD Tools"),
     sidebarLayout(
       sidebarPanel(
